@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth, googleProvider } from '../config/firebase';
-import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth'; // Add signInWithEmailAndPassword
+import { 
+  signInWithPopup, 
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  User as FirebaseUser
+} from 'firebase/auth';
 
 interface UserProfile {
   displayName: string;
@@ -16,6 +21,7 @@ interface AuthContextType {
   user: UserProfile | null;
   updateUserProfile: (profileData: UserProfile) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
+  signup: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   isAuthenticated: boolean;
@@ -33,18 +39,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return localStorage.getItem('isAuthenticated') === 'true';
   });
 
+  const createUserProfile = (firebaseUser: FirebaseUser): UserProfile => {
+    return {
+      displayName: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || '',
+      email: firebaseUser.email || '',
+      phone: '',
+      address: '',
+      city: '',
+      state: '',
+      pincode: '',
+    };
+  };
+
+  const login = async (email: string, password: string) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userProfile = createUserProfile(userCredential.user);
+      setUser(userProfile);
+      setIsAuthenticated(true);
+      localStorage.setItem('userProfile', JSON.stringify(userProfile));
+      localStorage.setItem('isAuthenticated', 'true');
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
+  };
+
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      const userProfile: UserProfile = {
-        displayName: result.user.displayName || '',
-        email: result.user.email || '',
-        phone: '',
-        address: '',
-        city: '',
-        state: '',
-        pincode: '',
-      };
+      const userProfile = createUserProfile(result.user);
       setUser(userProfile);
       setIsAuthenticated(true);
       localStorage.setItem('userProfile', JSON.stringify(userProfile));
@@ -52,31 +76,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch (error) {
       console.error('Error signing in with Google:', error);
       throw error;
-    }
-  };
-
-  const login = async (email: string, password: string) => {
-    try {
-      // Use Firebase authentication
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      
-      const mockUser: UserProfile = {
-        displayName: userCredential.user.displayName || '',
-        email: userCredential.user.email || '',
-        phone: '',
-        address: '',
-        city: '',
-        state: '',
-        pincode: '',
-      };
-      
-      setUser(mockUser);
-      setIsAuthenticated(true);
-      localStorage.setItem('userProfile', JSON.stringify(mockUser));
-      localStorage.setItem('isAuthenticated', 'true');
-    } catch (error) {
-      console.error('Login failed:', error);
-      throw new Error('Login failed');
     }
   };
 
@@ -102,17 +101,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('userProfile', JSON.stringify(user));
+  const signup = async (email: string, password: string) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userProfile = createUserProfile(userCredential.user);
+      setUser(userProfile);
+      setIsAuthenticated(true);
+      localStorage.setItem('userProfile', JSON.stringify(userProfile));
+      localStorage.setItem('isAuthenticated', 'true');
+    } catch (error: any) {
+      console.error('Signup error:', error);
+      throw new Error(error.message || 'Failed to create account');
     }
-  }, [user]);
+  };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
+        const userProfile = createUserProfile(firebaseUser);
+        setUser(userProfile);
+        setIsAuthenticated(true);
+        localStorage.setItem('userProfile', JSON.stringify(userProfile));
+        localStorage.setItem('isAuthenticated', 'true');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <AuthContext.Provider value={{
       user,
       updateUserProfile,
       login,
+      signup,
       logout,
       signInWithGoogle,
       isAuthenticated
