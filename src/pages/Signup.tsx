@@ -22,13 +22,15 @@ const Signup: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    login({
-      fullName: formData.fullName,
-      email: formData.email
-    });
-    navigate('/');
+    try {
+      await login(formData.email, formData.password);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing up:', error);
+      setError('Failed to sign up. Please try again.');
+    }
   };
 
   const handleGoogleSignup = async () => {
