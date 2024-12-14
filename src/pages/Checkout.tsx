@@ -3,32 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useOrders } from '../context/OrderContext';
 import { useAuth } from '../context/AuthContext';
-
-// Define interfaces
-interface CartItem {
-  id: string;  // Changed from number to string
-  name: string;
-  price: number;
-  quantity: number;
-  volume: string;
-  image: string;
-}
-
-interface Order {
-  id: string;
-  items: CartItem[];
-  totalAmount: number;
-  status: string;
-  orderDate: string;
-  deliveryAddress: {
-    fullName: string;
-    address: string;
-    city: string;
-    state: string;
-    zipCode: string;
-    phone: string;
-  };
-}
+import { Order, OrderStatus } from '../types/order';  // Remove CartItem since it's not being used directly
 
 const Checkout: React.FC = () => {
   const navigate = useNavigate();
@@ -59,7 +34,7 @@ const Checkout: React.FC = () => {
       const newOrder: Order = {
         id: `ORD${Date.now()}`,
         items: cart.map(item => ({
-          id: item.id.toString(), // Convert to string if it's a number
+          id: item.id.toString(),
           name: item.name,
           price: item.price,
           quantity: item.quantity,
@@ -67,7 +42,7 @@ const Checkout: React.FC = () => {
           image: item.image
         })),
         totalAmount,
-        status: 'delivered',
+        status: "pending" as OrderStatus,  // Use specific status
         orderDate: new Date().toISOString(),
         deliveryAddress: {
           fullName: shippingInfo.fullName,
