@@ -7,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login, signInWithGoogle } = useAuth();
+  const { login } = useAuth();  // Removed signInWithGoogle since it's not used
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,16 +19,6 @@ const Login = () => {
     } catch (error: any) {
       console.error('Error logging in:', error);
       setError('Invalid email or password');
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      navigate('/');
-    } catch (error: any) {
-      console.error('Google sign in error:', error);
-      setError('Failed to sign in with Google');
     }
   };
 
