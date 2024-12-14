@@ -13,8 +13,6 @@ const BrandShowcase: React.FC = () => {
             className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover transform hover:scale-105 transition-transform duration-500"
             loading="lazy"
           />
-          {/* Optional overlay for better visibility */}
-          <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 hover:bg-opacity-10"></div>
         </div>
 
         {/* Second Brand */}
@@ -25,8 +23,6 @@ const BrandShowcase: React.FC = () => {
             className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover transform hover:scale-105 transition-transform duration-500"
             loading="lazy"
           />
-          {/* Optional overlay for better visibility */}
-          <div className="absolute inset-0 bg-black bg-opacity-20 transition-opacity duration-300 hover:bg-opacity-10"></div>
         </div>
       </div>
     </div>
