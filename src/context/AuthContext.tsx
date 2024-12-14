@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth, googleProvider } from '../config/firebase'; // Import these
-import { signInWithPopup } from 'firebase/auth'; // Import this
+import { auth, googleProvider } from '../config/firebase';
+import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth'; // Add signInWithEmailAndPassword
 
 interface UserProfile {
   displayName: string;
@@ -17,7 +17,7 @@ interface AuthContextType {
   updateUserProfile: (profileData: UserProfile) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  signInWithGoogle: () => Promise<void>; // Add this
+  signInWithGoogle: () => Promise<void>;
   isAuthenticated: boolean;
 }
 
@@ -33,7 +33,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return localStorage.getItem('isAuthenticated') === 'true';
   });
 
-  // Add this function
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
@@ -58,26 +57,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string) => {
     try {
-      const mockUser = {
-        displayName: '',
-        email,
+      // Use Firebase authentication
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      
+      const mockUser: UserProfile = {
+        displayName: userCredential.user.displayName || '',
+        email: userCredential.user.email || '',
         phone: '',
         address: '',
         city: '',
         state: '',
         pincode: '',
       };
+      
       setUser(mockUser);
       setIsAuthenticated(true);
+      localStorage.setItem('userProfile', JSON.stringify(mockUser));
       localStorage.setItem('isAuthenticated', 'true');
     } catch (error) {
+      console.error('Login failed:', error);
       throw new Error('Login failed');
     }
   };
 
   const logout = async () => {
     try {
-      await auth.signOut(); // Add this
+      await auth.signOut();
       setUser(null);
       setIsAuthenticated(false);
       localStorage.removeItem('userProfile');
@@ -109,7 +114,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       updateUserProfile,
       login,
       logout,
-      signInWithGoogle, // Add this
+      signInWithGoogle,
       isAuthenticated
     }}>
       {children}

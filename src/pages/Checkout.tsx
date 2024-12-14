@@ -4,13 +4,30 @@ import { useCart } from '../context/CartContext';
 import { useOrders } from '../context/OrderContext';
 import { useAuth } from '../context/AuthContext';
 
+// Define interfaces
 interface CartItem {
-  id: string;
+  id: string;  // Changed from number to string
   name: string;
   price: number;
   quantity: number;
   volume: string;
   image: string;
+}
+
+interface Order {
+  id: string;
+  items: CartItem[];
+  totalAmount: number;
+  status: string;
+  orderDate: string;
+  deliveryAddress: {
+    fullName: string;
+    address: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    phone: string;
+  };
 }
 
 const Checkout: React.FC = () => {
@@ -39,10 +56,10 @@ const Checkout: React.FC = () => {
     e.preventDefault();
 
     try {
-      const newOrder = {
+      const newOrder: Order = {
         id: `ORD${Date.now()}`,
         items: cart.map(item => ({
-          id: item.id,
+          id: item.id.toString(), // Convert to string if it's a number
           name: item.name,
           price: item.price,
           quantity: item.quantity,
@@ -62,13 +79,8 @@ const Checkout: React.FC = () => {
         }
       };
 
-      // First add the order
       await addOrder(newOrder);
-      
-      // Then clear the cart
       await clearCart();
-      
-      // Finally navigate to success page
       navigate('/order-success');
     } catch (error) {
       console.error('Error processing order:', error);
@@ -216,7 +228,7 @@ const Checkout: React.FC = () => {
         <div className="bg-gray-50 rounded-lg p-6">
           <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
           <div className="space-y-4">
-            {cart.map((item: CartItem) => (
+            {cart.map((item) => (
               <div key={`${item.id}-${item.volume}`} className="flex justify-between">
                 <div>
                   <p className="font-medium">{item.name}</p>
