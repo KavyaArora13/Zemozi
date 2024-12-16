@@ -1,50 +1,96 @@
-# React + TypeScript + Vite
+ZEMOZI - Responsive eCommerce Website
+Zemozi is a fully responsive eCommerce web application built to simulate a functional online shopping platform. It offers a seamless and user-friendly interface with key features such as product display, cart management, order handling, and user authentication.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project showcases React.js and TypeScript for the frontend, ensuring a clean structure and efficient performance.
 
-Currently, two official plugins are available:
+Live Demo
+You can view the live project here: ZEMOZI
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Features
+Responsive Design
 
-## Expanding the ESLint configuration
+The website is designed to work on all devices, including desktops, tablets, and smartphones.
+Dynamic Product Display
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The website showcases a collection of products with details like name, price, description, and images.
+Interactive Cart System
 
-- Configure the top-level `parserOptions` property like this:
+Users can add products to the cart, view cart items, and proceed to checkout.
+Order History and Order Success
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+View previous orders and get a confirmation page upon successful order placement.
+User Authentication
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Users can sign up and log in to access personalized features, such as managing orders and profiles.
+Smooth Navigation
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Organized and accessible navigation through all core functionalities.
+Pages and Functionalities
+1. Home Page (Home.tsx)
+A landing page that highlights:
+Product categories and featured products.
+Promotional banners for a visually appealing interface.
+"Discover Beauty" section showcasing product images and pricing.
+2. Product Detail Page (ProductDetail.tsx)
+Displays detailed information for a selected product, including:
+Product image, name, price, and key benefits.
+Drop-down menu for selecting product volume/variants.
+"Add to Cart" functionality for adding items to the shopping cart.
+Tabs for additional product details:
+How to use
+Ingredients
+Shipping & returns
+3. Cart Page (Cart.tsx)
+Displays all items added to the cart.
+Provides options to:
+Update quantity or remove items.
+Proceed to checkout for payment.
+4. Checkout Page (Checkout.tsx)
+A form where users can enter delivery and payment details.
+Ensures a smooth transaction process leading to order confirmation.
+5. Order Success Page (OrderSuccess.tsx)
+A confirmation page shown after successfully placing an order.
+6. Order History Page (OrderHistory.tsx)
+Displays a list of previously placed orders with details like date, status, and items.
+7. Profile Page (Profile.tsx)
+Allows users to view and update personal information.
+8. Login and Signup Pages (Login.tsx & Signup.tsx)
+Provides user authentication functionalities.
+Users can register a new account or log in to an existing account for a personalized experience.
+Tech Stack
+Frontend: React.js, TypeScript
+Styling: CSS, SCSS
+Deployment: Vercel
+Installation and Setup
+Clone the repository:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+bash
+Copy code
+git clone https://github.com/KavyaArora13/Zemozi.git  
+Navigate to the project directory:
+
+bash
+Copy code
+cd Zemozi  
+Install dependencies:
+
+bash
+Copy code
+npm install  
+Start the development server:
+
+bash
+Copy code
+npm run dev  
+Open the project in your browser at:
+
+arduino
+Copy code
+http://localhost:3000  
+Responsive Design
+Zemozi is fully responsive, ensuring that users have an optimized experience on all devices. The layout adjusts seamlessly across various screen sizes without compromising functionality or aesthetics.
+
+Future Enhancements
+Implement a product search and filtering system.
+Add payment gateway integration for live transactions.
+Include product reviews and ratings.
