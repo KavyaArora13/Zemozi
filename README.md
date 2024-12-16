@@ -140,3 +140,7 @@ Developed by **Kavya Arora** as part of an assignment.
 For any queries or improvements, feel free to reach out!
 
 ---
+
+## License
+This project is licensed under the MIT License. Feel free to use and modify it for your needs.
+
