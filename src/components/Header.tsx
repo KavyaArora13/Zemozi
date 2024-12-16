@@ -44,7 +44,7 @@ const Header: React.FC = () => {
   return (
     <header className="relative z-50">
       <div className="bg-gray-900 text-white py-2 text-center text-sm md:text-base">
-        <p>COMIX DISCOUNTS </p>
+        <p>ZIMOZI DISCOUNTS </p>
       </div>
       
       <div className="bg-gray-800 py-4">
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
           {/* Desktop Header */}
           <div className="hidden md:flex items-center justify-between">
             <Link to="/" className="text-yellow-400 text-2xl font-bold">
-              COMIX
+              ZIMOZI
             </Link>
 
             <div className="relative flex-1 max-w-xl mx-12" ref={searchRef}>

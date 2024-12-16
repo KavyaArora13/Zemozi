@@ -33,7 +33,7 @@ const Login = () => {
         <div className="flex items-center h-full w-full bg-black bg-opacity-40">
           <div className="text-white px-20">
             <h1 className="text-5xl font-bold mb-6">Welcome Back!</h1>
-            <p className="text-xl">Log in to continue your fragrance journey with us.</p>
+            <p className="text-xl">Log in to continue your cosmetic journey with us.</p>
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@ const Login = () => {
               Log in to your account
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              Experience the world of luxury fragrances
+            Glow naturally, shine confidently—beauty crafted for you.
             </p>
           </div>
 

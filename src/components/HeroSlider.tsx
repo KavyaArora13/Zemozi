@@ -9,9 +9,9 @@ import 'swiper/css/navigation';
 
 const HeroSlider: React.FC = () => {
   const images = [
-    '/images/banner1.jpg',
-    '/images/banner2.jpg',
-    '/images/banner3.jpg'
+    '/images/banner1.webp',
+    '/images/banner2.webp',
+    '/images/banner3.webp'
   ];
 
   return (

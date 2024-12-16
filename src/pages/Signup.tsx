@@ -42,7 +42,7 @@ const Signup = () => {
               Create your account
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              Join us and discover your signature scent
+              Join us and discover your signature skincare routine
             </p>
           </div>
 
@@ -138,7 +138,7 @@ const Signup = () => {
         <div className="flex items-center h-full w-full bg-black bg-opacity-40">
           <div className="text-white px-20">
             <h1 className="text-5xl font-bold mb-6">Join Our Community</h1>
-            <p className="text-xl">Begin your aromatic journey with our curated collection of premium fragrances.</p>
+            <p className="text-xl">Unveiling beauty, naturally—where your glow meets our care.</p>
           </div>
         </div>
       </div>
