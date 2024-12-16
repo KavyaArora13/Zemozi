@@ -1,4 +1,4 @@
-ZEMOZI - Responsive eCommerce Website
+**ZEMOZI - Responsive eCommerce Website**
 Zemozi is a fully responsive eCommerce web application built to simulate a functional online shopping platform. It offers a seamless and user-friendly interface with key features such as product display, cart management, order handling, and user authentication.
 
 This project showcases React.js and TypeScript for the frontend, ensuring a clean structure and efficient performance.
