@@ -105,7 +105,7 @@ You can view the live project here: [ZEMOZI](https://zemozi.vercel.app/)
 
 5. Open the project in your browser at:  
    ```
-   http://localhost:3000
+   http://localhost:5173/
    ```
 
 ---
