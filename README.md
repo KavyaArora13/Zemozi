@@ -122,18 +122,6 @@ Zemozi is fully responsive, ensuring that users have an optimized experience on 
 
 ---
 
-## Screenshots
-### 1. Home Page
-![Home Page](./path-to-screenshot/home.png)
-
-### 2. Product Detail Page
-![Product Detail Page](./path-to-screenshot/product-detail.png)
-
-### 3. Cart Page
-![Cart Page](./path-to-screenshot/cart.png)
-
----
-
 ## Credits
 Developed by **Kavya Arora** as part of an assignment.
 
